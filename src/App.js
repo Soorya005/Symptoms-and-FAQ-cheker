@@ -7,21 +7,21 @@ import axios from 'axios';
 const App = () => {
   const [probableDiseases, setProbableDiseases] = useState([]);
   const [mostLikelyDisease, setMostLikelyDisease] = useState(null);
-  const [loading, setLoading] = useState(false); // Added loading state
-  const [error, setError] = useState(null); // Added error state
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   const handleSymptomClick = (symptomId) => {
     setLoading(true);
     setError(null);
 
-    axios.get(`https://api.example.com/diseases/${symptomId}`)
+    axios.get(`/diseases?symptom=${symptomId}`)
       .then(response => {
-        const diseases = response.data;
+        const diseases = response.data.diseases;
         setProbableDiseases(diseases);
-        setMostLikelyDisease(diseases.length > 0 ? diseases[0] : null); // Added check for empty array
+        setMostLikelyDisease(diseases.length > 0 ? diseases[0] : null);
       })
       .catch(error => {
-        setError('Failed to fetch data.'); // Set error message
+        setError('Failed to fetch data.');
         console.error(error);
       })
       .finally(() => {
