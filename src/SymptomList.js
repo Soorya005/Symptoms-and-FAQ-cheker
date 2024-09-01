@@ -5,6 +5,7 @@ const SymptomList = ({ onSymptomClick }) => {
     { id: 'headache', name: 'Headache' },
     { id: 'fever', name: 'Fever' },
     { id: 'cough', name: 'Cough' },
+       
   ];
 
   return (
