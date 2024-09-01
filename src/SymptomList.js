@@ -1,31 +1,18 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-const SymptomList = () => {
-  const [symptoms, setSymptoms] = useState([
-    { id: 1, name: 'Headache' },
-    { id: 2, name: 'Fever' },
-    { id: 3, name: 'Cough' },
-    // ...
-  ]);
-
-  const handleSymptomClick = (symptomId) => {
-    // Call API to fetch probable diseases for the selected symptom
-    axios.get(`https://api.example.com/diseases/${symptomId}`)
-      .then(response => {
-        // Update state with probable diseases
-        setProbableDiseases(response.data);
-      })
-      .catch(error => {
-        console.error(error);
-      });
-  };
+const SymptomList = ({ onSymptomClick }) => {
+  const symptoms = [
+    { id: 'headache', name: 'Headache' },
+    { id: 'fever', name: 'Fever' },
+    { id: 'cough', name: 'Cough' },
+  ];
 
   return (
     <div>
       <h1>Symptom Checker</h1>
       <ul>
         {symptoms.map((symptom) => (
-          <li key={symptom.id} onClick={() => handleSymptomClick(symptom.id)}>
+          <li key={symptom.id} onClick={() => onSymptomClick(symptom.id)}>
             {symptom.name}
           </li>
         ))}
