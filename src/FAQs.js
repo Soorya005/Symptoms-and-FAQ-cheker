@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'; // Import useState and useEffect
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 const FAQs = ({ mostLikelyDisease }) => {
@@ -6,10 +6,8 @@ const FAQs = ({ mostLikelyDisease }) => {
 
   useEffect(() => {
     if (mostLikelyDisease && mostLikelyDisease.id) {
-      // Call API to fetch FAQs for the most likely disease
-      axios.get(`https://api.example.com/faqs/${mostLikelyDisease.id}`)
+      axios.get(`/faqs?diseaseId=${mostLikelyDisease.id}`)
         .then(response => {
-          // Update state with FAQs
           setFAQs(response.data);
         })
         .catch(error => {
@@ -19,7 +17,7 @@ const FAQs = ({ mostLikelyDisease }) => {
   }, [mostLikelyDisease]);
 
   if (!mostLikelyDisease) {
-    return null; // Render nothing if there's no disease selected
+    return null;
   }
 
   return (
